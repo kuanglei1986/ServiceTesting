@@ -1,5 +1,5 @@
+import com.kl.wework.WeworkConfig;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -11,8 +11,8 @@ public class GetTokenTest {
     @Test
     void testToken() {
         RestAssured.given()
-                .param("corpid","ww73530bb447ccc302")
-                .param("corpsecret","yQvRMp3M3aNHnWpGZ8tnNRLMBY84GefYNE__B74im74")
+                .param("corpid", WeworkConfig.getInstance().corId)
+                .param("corpsecret",WeworkConfig.getInstance().secret)
         .when().get("\n" +
                 "https://qyapi.weixin.qq.com/cgi-bin/gettoken")
         .then().log().all()
