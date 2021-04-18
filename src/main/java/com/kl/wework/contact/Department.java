@@ -20,15 +20,28 @@ public class Department {
 
     }
 
-//    删除部门
-public Response delete(String id) {
-    return given().log().all()
-            .param("access_token", Wework.getToken())
-            .param("id",id)
-            .when().get("https://qyapi.weixin.qq.com/cgi-bin/department/delete")
-            .then().log().all().statusCode(200).extract().response();
+    //    创建部门
+    public Response create(String name, String parentId) {
+        return given().log().all()
+                .queryParam("access_token", Wework.getToken())
+                .body("{\n" +
+                " \"name\": " + name + ",\n"+
+                " \"parentid\": " + parentId + "\n"+
+                "}")
+                .when().post("https://qyapi.weixin.qq.com/cgi-bin/department/create")
+                .then().log().all().statusCode(200).extract().response();
 
-}
+    }
+
+    //    删除部门
+    public Response delete(String id) {
+        return given().log().all()
+                .param("access_token", Wework.getToken())
+                .param("id",id)
+                .when().get("https://qyapi.weixin.qq.com/cgi-bin/department/delete")
+                .then().log().all().statusCode(200).extract().response();
+
+    }
 
 
 }

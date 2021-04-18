@@ -7,9 +7,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DepartmentTest {
+    Department department;
 
     @BeforeEach
     void setUp() {
+        if(department == null) {
+            department = new Department();
+        }
+
     }
 
     @Test
@@ -17,6 +22,11 @@ class DepartmentTest {
         Department department = new Department();
         department.list("").then().statusCode(200)
         .body("department.name[2]",equalTo("kl研发中"));
+    }
+
+    @Test
+    void create() {
+        department.create("dep2","1");
     }
 
     @Test
