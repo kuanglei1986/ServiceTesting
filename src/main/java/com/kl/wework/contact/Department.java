@@ -8,6 +8,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -71,6 +72,18 @@ public class Department extends Contact{
                 .when().post("https://qyapi.weixin.qq.com/cgi-bin/department/update")
                 .then().log().all().statusCode(200).extract().response();
 
+    }
+
+    public Response deleteAll() {
+        List<Integer> idList=list("").then().log().all().extract().path("department.id");
+        System.out.println(idList);
+        idList.forEach(id->delete(id.toString()));
+        return null;
+    }
+
+    public static void main(String[] args) {
+        Department dep = new Department();
+        dep.deleteAll();
     }
 
 

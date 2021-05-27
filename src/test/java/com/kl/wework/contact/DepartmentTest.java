@@ -60,6 +60,11 @@ class DepartmentTest {
     }
 
     @Test
+    void deleteAll() {
+        department.deleteAll();
+    }
+
+    @Test
     void update() {
         String oldname = "test" + random;
         department.create(oldname,"1");
